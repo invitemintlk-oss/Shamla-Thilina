@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { C, F, invitation as inv } from "../data";
 
-const title = `${inv.bride} & ${inv.groom}'s Homecoming`;
+const title = `${inv.groom} & ${inv.bride}'s Homecoming`;
 const details = inv.events.map((e) => `${e.title} — ${e.time}, ${e.place}`).join("\n");
 const location = `${inv.venue.name}, ${inv.venue.address}`;
 

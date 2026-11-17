@@ -47,7 +47,7 @@ function Initials({ amp }: { amp: string }) {
   );
 }
 
-export default function Invitation() {
+export default function Invitation({ guest }: { guest?: string }) {
   const [opened, setOpened] = useState(false);
   const [active, setActive] = useState("hero");
   const audio = useRef<HTMLAudioElement>(null);
@@ -94,7 +94,7 @@ export default function Invitation() {
       }}
     >
       <audio ref={audio} src="/eucalyptus-seal/music.mp3" loop preload="auto" />
-      <Curtain open={opened} onOpen={open} />
+      <Curtain open={opened} onOpen={open} guest={guest} />
 
       {/* backdrops */}
       <div
@@ -136,7 +136,7 @@ export default function Invitation() {
       >
         <a
           href="#hero"
-          aria-label={`${inv.bride} and ${inv.groom}`}
+          aria-label={`${inv.groom} and ${inv.bride}`}
           className="col-[1/-1] justify-self-center leading-none md:col-auto md:justify-self-start"
           style={{ fontFamily: F.deco, color: C.green, fontSize: "1.4rem", letterSpacing: "0.08em" }}
         >
@@ -182,19 +182,19 @@ export default function Invitation() {
               </span>
               <h2 className="my-1" style={{ fontFamily: F.deco, color: C.green, lineHeight: 1 }}>
                 <span className="block uppercase tracking-[0.04em]" style={{ fontSize: "clamp(2.6rem, 7vw, 4.6rem)" }}>
-                  {inv.bride}
+                  {inv.groom}
                 </span>
                 <span className="mt-2 block text-[0.7rem] uppercase tracking-[0.18em]" style={{ fontFamily: F.sans, color: C.muted, lineHeight: 1.6 }}>
-                  {inv.brideParents}
+                  {inv.groomParents}
                 </span>
                 <span className="my-1 block" style={{ fontFamily: F.script, color: C.sage, fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none" }}>
                   and
                 </span>
                 <span className="block uppercase tracking-[0.04em]" style={{ fontSize: "clamp(2.6rem, 7vw, 4.6rem)" }}>
-                  {inv.groom}
+                  {inv.bride}
                 </span>
                 <span className="mt-2 block text-[0.7rem] uppercase tracking-[0.18em]" style={{ fontFamily: F.sans, color: C.muted, lineHeight: 1.6 }}>
-                  {inv.groomParents}
+                  {inv.brideParents}
                 </span>
               </h2>
               <p className="max-w-[30ch] text-sm uppercase leading-[1.85] tracking-[0.15em] sm:text-[0.95rem]" style={{ color: C.ink, textWrap: "balance" }}>
@@ -220,7 +220,7 @@ export default function Invitation() {
                 animate={opened ? { opacity: 1, scale: 1 } : undefined}
                 transition={{ duration: 1.1, delay: 0.7, ease }}
               >
-                <Photo src={inv.heroPhoto} alt={`${inv.bride} and ${inv.groom}`} />
+                <Photo src={inv.heroPhoto} fit="contain" alt={`${inv.groom} and ${inv.bride}`} />
                 <div aria-hidden="true" className="pointer-events-none absolute inset-2.5" style={{ borderRadius: "248px 248px 12px 12px", border: "1px solid rgba(204, 111, 141, 0.45)" }} />
               </motion.div>
             </div>
@@ -243,7 +243,7 @@ export default function Invitation() {
             className="group relative mx-auto w-[min(88%,420px)] overflow-hidden"
             style={{ aspectRatio: "4 / 5", borderRadius: "260px 260px 18px 18px", border: "1px solid rgba(204, 111, 141, 0.35)", boxShadow: "0 30px 60px -34px rgba(55,40,80,0.45)", background: "#fff" }}
           >
-            <Photo src={inv.storyPhoto} fit="contain" alt={`Illustration of ${inv.bride} and ${inv.groom}`} />
+            <Photo src={inv.storyPhoto} fit="contain" alt={`Illustration of ${inv.groom} and ${inv.bride}`} />
             <div aria-hidden="true" className="pointer-events-none absolute inset-2.5" style={{ borderRadius: "248px 248px 12px 12px", border: "1px solid rgba(204, 111, 141, 0.45)" }} />
           </Reveal>
         </section>
@@ -335,7 +335,7 @@ export default function Invitation() {
       </div>
 
       <div className="relative" style={{ zIndex: 2 }}>
-        <Rsvp />
+        <Rsvp guest={guest} />
       </div>
 
       {/* footer */}
@@ -365,7 +365,7 @@ export default function Invitation() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/photos/save-the-date.webp"
-                  alt={`Illustration of ${inv.bride} and ${inv.groom}`}
+                  alt={`Illustration of ${inv.groom} and ${inv.bride}`}
                   className="h-full w-full object-cover"
                   style={{ borderRadius: "194px 194px 11px 11px" }}
                 />
@@ -383,7 +383,7 @@ export default function Invitation() {
                 <Initials amp={C.goldLight} />
               </div>
               <div className="mt-1" style={{ fontFamily: F.deco, fontSize: "1.3rem", letterSpacing: "0.06em", color: "rgba(251, 230, 236, 0.92)" }}>
-                {inv.bride} &amp; {inv.groom}
+                {inv.groom} &amp; {inv.bride}
               </div>
             </div>
           </Reveal>

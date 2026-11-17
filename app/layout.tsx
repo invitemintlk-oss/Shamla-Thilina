@@ -18,8 +18,8 @@ const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "500", "
 const marcellus = Marcellus({ subsets: ["latin"], weight: "400", variable: "--font-marcellus" });
 
 export const metadata: Metadata = {
-  title: `${invitation.bride} & ${invitation.groom} — Homecoming Invitation`,
-  description: `Join us for the homecoming of ${invitation.bride} & ${invitation.groom} on ${invitation.dateLong}.`,
+  title: `${invitation.groom} & ${invitation.bride} — Homecoming Invitation`,
+  description: `Join us for the homecoming of ${invitation.groom} & ${invitation.bride} on ${invitation.dateLong}.`,
   openGraph: { images: ["/og.jpg"] },
 };
 

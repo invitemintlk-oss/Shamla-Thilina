@@ -9,19 +9,35 @@ import { Reveal } from "./ui";
 const label = "text-[0.68rem] uppercase tracking-[0.18em]";
 const border = "1px solid rgba(204, 111, 141, 0.45)";
 
-export default function Rsvp() {
-  const [name, setName] = useState("");
+export default function Rsvp({ guest }: { guest?: string }) {
+  const [name, setName] = useState(guest ?? "");
   const [attending, setAttending] = useState<boolean | null>(null);
   const [guests, setGuests] = useState(1);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     if (attending === null) return setError("Please let us know if you can attend.");
+    if (!inv.rsvpScriptUrl.startsWith("https://")) return setError("RSVP is not set up yet. Please try again later.");
     setError("");
-    // TODO: send { name, attending, guests } to your backend here
-    setSent(true);
+    setSending(true);
+    try {
+      // Sent as text/plain (fetch's default for a string body) so the browser skips the CORS preflight Apps Script can't answer.
+      const res = await fetch(inv.rsvpScriptUrl, {
+        method: "POST",
+        body: JSON.stringify({ name: name.trim(), attending, guests: attending ? guests : 0 }),
+      });
+      const out = await res.json();
+      if (out.result !== "success") throw new Error(out.message);
+      setSent(true);
+    } catch {
+      setError("Sorry, we couldn't send your RSVP. Please check your connection and try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -107,7 +123,7 @@ export default function Rsvp() {
                   </div>
                 </div>
 
-                <div className="mb-5">
+                {attending !== false && <div className="mb-5">
                   <p className={`mb-2.5 ${label}`} style={{ fontFamily: F.sans, color: C.gold }}>
                     Number of guests
                   </p>
@@ -122,7 +138,7 @@ export default function Rsvp() {
                       +
                     </CountBtn>
                   </div>
-                </div>
+                </div>}
 
                 {error && (
                   <p className="mb-4 text-center text-sm" style={{ color: "#B5476A" }} role="alert">
@@ -132,11 +148,12 @@ export default function Rsvp() {
 
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-full py-4 text-[0.8rem] font-semibold uppercase tracking-[0.22em] transition-transform duration-200 hover:-translate-y-0.5 active:scale-95"
+                  disabled={sending}
+                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-full py-4 text-[0.8rem] font-semibold uppercase tracking-[0.22em] transition-transform duration-200 hover:-translate-y-0.5 active:scale-95 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
                   style={{ fontFamily: F.sans, background: "linear-gradient(135deg,#868DB8,#5F679A)", color: C.cream, boxShadow: "0 14px 30px -12px rgba(78,86,137,0.55)" }}
                 >
                   <Send className="h-3.5 w-3.5" aria-hidden />
-                  Send our RSVP
+                  {sending ? "Sending…" : "Send our RSVP"}
                 </button>
               </motion.div>
             )}

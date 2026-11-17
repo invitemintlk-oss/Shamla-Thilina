@@ -29,14 +29,16 @@ export const invitation = {
   brideParents: "Daughter of Mr. & Mrs. Fouzer",
   groom: "Thilina",
   groomParents: "Son of the late Mr. S. Jayasekara & Mrs. Ilangakoon",
-  initials: ["S", "T"] as const,
+  initials: ["T", "S"] as const,
   // ISO date-time with Sri Lanka offset — drives the countdown & calendar links
   weddingStart: "2026-12-23T18:30:00+05:30",
   weddingEnd: "2026-12-23T23:30:00+05:30",
-  dateLong: "Wednesday, December 23, 2026",
+  dateLong: "Wednesday, 23rd December 2026",
   dateShort: "23 . 12 . 26",
   rsvpBy: "Kindly respond at your earliest convenience",
   maxGuests: 4,
+  // Google Apps Script web app URL (ends with /exec) — see google-apps-script/Code.gs
+  rsvpScriptUrl: "https://script.google.com/macros/s/AKfycby5mM1PrzL6fPsda1PZDtWP5qoDmVSPb0Llijzfk6s_bwhmiEQByLurwImrkLcO5MMl/exec",
 
   // Photos (set to null to show the "Your photo" placeholder)
   heroPhoto: "/photos/hero.jpg" as string | null,

@@ -1,4 +1,4 @@
-# Homecoming Invitation — Shamla & Thilina
+# Homecoming Invitation — Thilina & Shamla
 
 Next.js 15 + Tailwind CSS v4 + Framer Motion digital wedding invitation.
 

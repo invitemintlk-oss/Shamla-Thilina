@@ -8,7 +8,7 @@ import { C, F, invitation as inv } from "../data";
 const shadow = "0 1px 10px rgba(255,252,253,0.9)";
 const ease = [0.65, 0, 0.35, 1] as const;
 
-export default function Curtain({ open, onOpen }: { open: boolean; onOpen: () => void }) {
+export default function Curtain({ open, onOpen, guest }: { open: boolean; onOpen: () => void; guest?: string }) {
   // lock page scroll while the curtain is closed
   useEffect(() => {
     document.documentElement.style.overflow = open ? "" : "hidden";
@@ -88,15 +88,25 @@ export default function Curtain({ open, onOpen }: { open: boolean; onOpen: () =>
                   textShadow: shadow,
                 }}
               >
-                <span className="block">{inv.bride}</span>
+                <span className="block">{inv.groom}</span>
                 <span className="my-0.5 block" style={{ fontFamily: F.script, color: C.gold, textTransform: "none", fontSize: "0.72em", lineHeight: 1 }}>
                   &amp;
                 </span>
-                <span className="block">{inv.groom}</span>
+                <span className="block">{inv.bride}</span>
               </h2>
-              <p className="mb-8 text-sm italic" style={{ fontFamily: F.body, color: C.ink, textShadow: shadow }}>
-                Request the honour of your presence
-              </p>
+              {guest ? (
+                <p className="mx-auto mb-8 max-w-[30ch] text-[0.95rem] italic leading-relaxed" style={{ fontFamily: F.body, color: C.ink, textShadow: shadow }}>
+                  We cordially invite
+                  <span className="my-1.5 block not-italic" style={{ fontFamily: F.script, color: C.green, fontSize: "clamp(1.9rem,6vw,2.4rem)", lineHeight: 1.1 }}>
+                    {guest}
+                  </span>
+                  to celebrate our special day with us.
+                </p>
+              ) : (
+                <p className="mb-8 text-sm italic" style={{ fontFamily: F.body, color: C.ink, textShadow: shadow }}>
+                  Request the honour of your presence
+                </p>
+              )}
               <motion.button
                 type="button"
                 onClick={onOpen}
