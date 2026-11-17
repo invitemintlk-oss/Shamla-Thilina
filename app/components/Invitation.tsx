@@ -220,7 +220,7 @@ export default function Invitation({ guest }: { guest?: string }) {
                 animate={opened ? { opacity: 1, scale: 1 } : undefined}
                 transition={{ duration: 1.1, delay: 0.7, ease }}
               >
-                <Photo src={inv.heroPhoto} fit="contain" alt={`${inv.groom} and ${inv.bride}`} />
+                <Photo src={inv.heroPhoto} alt={`${inv.groom} and ${inv.bride}`} />
                 <div aria-hidden="true" className="pointer-events-none absolute inset-2.5" style={{ borderRadius: "248px 248px 12px 12px", border: "1px solid rgba(204, 111, 141, 0.45)" }} />
               </motion.div>
             </div>

@@ -41,7 +41,7 @@ export const invitation = {
   rsvpScriptUrl: "https://script.google.com/macros/s/AKfycby5mM1PrzL6fPsda1PZDtWP5qoDmVSPb0Llijzfk6s_bwhmiEQByLurwImrkLcO5MMl/exec",
 
   // Photos (set to null to show the "Your photo" placeholder)
-  heroPhoto: "/photos/hero.jpg" as string | null,
+  heroPhoto: "/photos/hero-red.jpg" as string | null,
   storyPhoto: "/photos/story.webp" as string | null,
 
 
